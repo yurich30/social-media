@@ -7,9 +7,9 @@ const MyPosts = () => {
         <div>my post
             <div>new post</div>
             <div className={profile.posts}>
-                <Post/>
-                <Post/>
-                <Post/>
+                <Post message="Hi. How are you?" likeCount='3'/>
+                <Post message='It`s my first post' likeCount='5'/>
+                <Post message='Hi, it`s my second post' likeCount='7'/>
             </div>
         </div>
     );
