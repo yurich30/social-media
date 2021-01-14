@@ -1,15 +1,34 @@
 import React from 'react';
-import profile from'./MyPosts.module.css'
+import s from'./MyPosts.module.css'
 import Post from './Post/Post';
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
+    const postsElements = props.posts.map( p => <Post message={p.message} likeCount={p.likeCount}/>)
+
+    let textArea = React.createRef();
+
+    function addPost() {
+        let action = { type: 'ADDPOST' }
+        props.dispatch(action);
+    }
+
+    function onPostChange(){
+        let updateText = textArea.current.value;
+        let action = { type: 'UPDATEPOSTTEXT', text: updateText }
+        props.dispatch(action);
+    }
+
     return(
-        <div>my post
+        <div className={s.postBlock}>
+            <h3>My posts</h3>
+            <div>
+                <input type="text" ref={textArea} value={props.newPostText} onChange={onPostChange}/>
+            </div>
+            <button onClick={ addPost }>Add post</button>
             <div>new post</div>
-            <div className={profile.posts}>
-                <Post message="Hi. How are you?" likeCount='3'/>
-                <Post message='It`s my first post' likeCount='5'/>
-                <Post message='Hi, it`s my second post' likeCount='7'/>
+            <div className={s.posts}>
+                { postsElements }
             </div>
         </div>
     );

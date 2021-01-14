@@ -1,15 +1,14 @@
 import React from 'react';
-import profile from'./Profile.module.css'
 import MyPosts from './MyPosts/MyPosts';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
-const Profile = () => {
+const Profile = (props) => {
     return(
         <div>
-            <div>
-            <img src="https://specials-images.forbesimg.com/imageserve/5ed424a52259c9000769e94c/960x0.jpg?cropX1=120&cropX2=1267&cropY1=96&cropY2=668" alt=""/>
-            </div>
-            <div>ava+description</div>
-            <MyPosts/>
+            <ProfileInfo />
+            <MyPosts posts={props.profilePage.posts} 
+            dispatch={props.dispatch}
+            newPostText={props.profilePage.newPostText}/>
         </div>
     );
 }
