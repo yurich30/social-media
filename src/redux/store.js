@@ -1,3 +1,18 @@
+const UPDATEPOSTTEXT = 'UPDATEPOSTTEXT'
+const ADDPOST = 'ADDPOST'
+const ADDMESSAGE = 'ADDMESSAGE'
+const UPDATEMESSAGETEXT = 'UPDATEMESSAGETEXT'
+
+
+
+export const updatePostTextActionCreator = (updateText) => ({ type: UPDATEPOSTTEXT, text: updateText })
+
+export const addPostActionCreator = () => ({ type: ADDPOST })
+
+export const addMessageActionCreator = () => ({ type:  ADDMESSAGE});
+
+export const updateMessageTextActionCreator = (message) => ({ type: UPDATEMESSAGETEXT, text: message })
+
 const store = {
     _state : {
         profilePage: {
