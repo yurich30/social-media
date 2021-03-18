@@ -1,5 +1,5 @@
 import React from 'react'
-import { addMessageActionCreator, updateMessageTextActionCreator } from '../../redux/store';
+import { addMessageActionCreator, updateMessageTextActionCreator } from '../../redux/messagesPageReducer';
 import DialogItem from './DialogItem/DialogItem';
 import c from './Dialogs.module.css'
 import Message from './Messages/Message';
@@ -15,10 +15,9 @@ const Dialogs = (props) => {
     }
 
     let onMessageChange = () => {
-        let message = messageText.current.value;
-        props.dispatch(updateMessageTextActionCreator(message));
+        let text = messageText.current.value;
+        props.dispatch(updateMessageTextActionCreator(text));
     }
-
     return (
         <div className={c.dialogs}>
             <div className={c.dialogsItem}>

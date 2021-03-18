@@ -1,17 +1,5 @@
-const UPDATEPOSTTEXT = 'UPDATEPOSTTEXT'
-const ADDPOST = 'ADDPOST'
-const ADDMESSAGE = 'ADDMESSAGE'
-const UPDATEMESSAGETEXT = 'UPDATEMESSAGETEXT'
-
-
-
-export const updatePostTextActionCreator = (updateText) => ({ type: UPDATEPOSTTEXT, text: updateText })
-
-export const addPostActionCreator = () => ({ type: ADDPOST })
-
-export const addMessageActionCreator = () => ({ type:  ADDMESSAGE});
-
-export const updateMessageTextActionCreator = (message) => ({ type: UPDATEMESSAGETEXT, text: message })
+import messagesPageReducer from "./messagesPageReducer"
+import profilePageReducer from "./profilePageReducer"
 
 const store = {
     _state : {
@@ -54,34 +42,40 @@ const store = {
         this._callSubscriber = observe;
     },
     dispatch(action){
-        if(action.type === 'ADDPOST'){
-            let newPost = {
-                id: 4,
-                message: this._state.profilePage.newPostText,
-                likeCount: 0
-            }
-            this._state.profilePage.posts.push(newPost); 
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state)
-        } else if(action.type === 'UPDATEPOSTTEXT') {
-            this._state.profilePage.newPostText = action.text;
-            console.log(this._state.profilePage.newPostText);
-            this._callSubscriber(this._state);
-        } else if(action.type === 'ADDMESSAGE'){
-            let newMessage = {
-                id: 5,
-                message: this._state.messagesPage.newMessageText
-            }
-            this._state.messagesPage.messages.push(newMessage);
-            this._state.messagesPage.newMessageText = '';
-            this._callSubscriber(this._state);
-        } else if(action.type === 'UPDATEMESSAGETEXT'){
-            this._state.messagesPage.newMessageText = action.text;
-            this._callSubscriber(this._state)
-        }
+    //     if(action.type === 'ADDPOST'){
+    //         let newPost = {
+    //             id: 4,
+    //             message: this._state.profilePage.newPostText,
+    //             likeCount: 0
+    //         }
+    //         this._state.profilePage.posts.push(newPost); 
+    //         this._state.profilePage.newPostText = '';
+    //         this._callSubscriber(this._state)
+    //     } else if(action.type === 'UPDATEPOSTTEXT') {
+    //         this._state.profilePage.newPostText = action.text;
+    //         console.log(this._state.profilePage.newPostText);
+    //         this._callSubscriber(this._state);
+    //     } else if(action.type === 'ADDMESSAGE'){
+    //         let newMessage = {
+    //             id: 5,
+    //             message: this._state.messagesPage.newMessageText
+    //         }
+    //         this._state.messagesPage.messages.push(newMessage);
+    //         this._state.messagesPage.newMessageText = '';
+    //         this._callSubscriber(this._state);
+    //     } else if(action.type === 'UPDATEMESSAGETEXT'){
+    //         this._state.messagesPage.newMessageText = action.text;
+    //         this._callSubscriber(this._state)
+    //     }
+    // }
+        this._state.profilePage = profilePageReducer(this._state.profilePage, action)
+        this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
+        this._callSubscriber(this._state)
     }
 }
 
-export default store;
+console.log(store._state.messagesPage.newMessageText)
+
+export default store
 
 window.store = store;
