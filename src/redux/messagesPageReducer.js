@@ -12,9 +12,9 @@ let initialState = {
     ],
     messages : [
         {id:1, message: 'Hello'},
-        {id:1, message: 'How are you?'},
-        {id:1, message: 'Yo'},
-        {id:1, message: 'Yo'}
+        {id:2, message: 'How are you?'},
+        {id:3, message: 'Yo'},
+        {id:4, message: 'Yo'}
     ],
     newMessageText : '',
 }
@@ -22,16 +22,16 @@ let initialState = {
 const messagesPageReducer = (state = initialState, action) => {
     switch(action.type){
         case UPDATEMESSAGETEXT: 
-            state.newMessageText = action.text;
-            return state;
-        case ADDMESSAGE:
-            let newMessage = {
-                id: 5,
-                message: state.newMessageText
+            return {
+                ...state,
+                newMessageText: action.text
             }
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-            return state;
+        case ADDMESSAGE:
+            return {
+                ...state,
+                messages: [...state.messages, {id: 5, message: state.newMessageText}],
+                newMessageText: ''
+            }
         default: return state
     }
 }
