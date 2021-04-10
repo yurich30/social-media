@@ -1,7 +1,5 @@
-import React from 'react'
 import { connect } from 'react-redux';
 import { addMessageActionCreator, updateMessageTextActionCreator } from '../../redux/messagesPageReducer';
-import store from '../../redux/storeRedux';
 import Dialogs from './Dialogs';
 
 // const DialogsContainer = () => {
