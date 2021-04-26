@@ -1,7 +1,8 @@
-import React from 'react'  
+import React from 'react' 
+import Preloader from '../common/Preloader';
 
 const Users = (props) => {
-
+    console.log(props);
     let totalPages = Math.ceil(props.totalUsers/props.pageSize)
 
     let pages = [];
@@ -12,6 +13,9 @@ const Users = (props) => {
 
     return(
         <div>
+        {
+            props.isFetch ? <Preloader/> : null
+        }
         {
             pages.map(p => {
                 return <span 
