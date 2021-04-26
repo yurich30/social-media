@@ -1,16 +1,25 @@
-import * as axios from 'axios'
-import React from 'react'
+import React from 'react'  
 
 const Users = (props) => {
 
-    axios.get("https://social-network.samuraijs.com/api/1.0/users")
-    .then(response => {
-        if(props.users.length === 0){
-            props.setUsers(response.data.items)
-        }
-    })
+    let totalPages = Math.ceil(props.totalUsers/props.pageSize)
 
-    return <div>
+    let pages = [];
+
+    for(let i=1; i <= totalPages; i++){
+        pages.push(i)
+    }
+
+    return(
+        <div>
+        {
+            pages.map(p => {
+                return <span 
+                className={props.currentPage === p ? "active" : ""}
+                onClick={() => props.onCurrentPageChange(p)}
+                >{p}</span>
+            })
+        }
         {
             props.users.map( user => <div key={user.id}>
                 <span>
@@ -18,7 +27,9 @@ const Users = (props) => {
                         <img src={user.photos.small} alt=""/>
                     </div>
                     <div>
-                        {user.followed ? <button onClick={() => {props.unfollow(user.id)}}>Unfollow</button> : <button onClick={() => {props.follow(user.id)}}>Follow</button>}
+                        {user.followed 
+                        ? <button onClick={() => {props.unfollow(user.id)}}>Unfollow</button> 
+                        : <button onClick={() => {props.follow(user.id)}}>Follow</button>}
                     </div>
                 </span>
                 <span>
@@ -33,8 +44,8 @@ const Users = (props) => {
                 </span>
             </div>)
         }
-        {/* here will be users */}
     </div>
+    )
 }
 
 export default Users
