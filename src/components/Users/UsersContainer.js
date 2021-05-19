@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { follow, setCurrentPage, setTotalUsers, setUsers, toggleIsFetching, unfollow} from '../../redux/usersPageReducer'
+import { follow, setCurrentPage, setTotalUsers, setUsers, toggleIsFetching, unfollow, toggleFollowingInProgress} from '../../redux/usersPageReducer'
 import * as axios from 'axios'
 import React from 'react'
 import './Users.css'
@@ -43,6 +43,8 @@ class UsersAPI extends React.Component{
             follow={this.props.follow}
             unfollow={this.props.unfollow}
             isFetch={this.props.isFetch}
+            toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+            followingInProgress={this.props.followingInProgress}
         /> 
     }
 }
@@ -52,7 +54,8 @@ const mapStateToProps = (state) => ({
     pageSize: state.usersPage.pageSize,
     totalUsers: state.usersPage.totalUsers,
     currentPage: state.usersPage.currentPage,
-    isFetch: state.usersPage.isFetch
+    isFetch: state.usersPage.isFetch,
+    followingInProgress: state.usersPage.followingInProgress
 })
 
 const UsersContainer = connect(mapStateToProps, 
@@ -62,7 +65,8 @@ const UsersContainer = connect(mapStateToProps,
         setUsers,
         setCurrentPage,
         setTotalUsers,
-        toggleIsFetching
+        toggleIsFetching,
+        toggleFollowingInProgress
     }
     )(UsersAPI)
 
