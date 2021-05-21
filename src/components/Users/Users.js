@@ -49,22 +49,12 @@ const Users = (props) => {
                         }}>Unfollow</button> 
                         : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
                             props.toggleFollowingInProgress(true, user.id)
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,{}, 
-                            {
-                                withCredentials: true,
-                                headers: {"API-KEY": "336e5163-4305-4527-b245-59ad1b7b0990"}
-                            })
-                                .then(response => {
-                                    if(response.data.resultCode === 0){
+                                usersAPI.follow(user.id).then(resultCode => {
+                                    if(resultCode === 0){
                                         props.follow(user.id)
                                     }
                                     props.toggleFollowingInProgress(false, user.id)
                                 })
-                                // usersAPI.unfollow(user.id).then(resultCode => {
-                                //     if(resultCode === 0){
-                                //         props.unfollow(user.id)
-                                //     }
-                                // })
                             }}>Follow</button>}
                     </div>
                 </span>
