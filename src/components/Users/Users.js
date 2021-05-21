@@ -1,5 +1,4 @@
-import React from 'react' 
-import * as axios from 'axios'
+import React from 'react'
 import { NavLink } from 'react-router-dom';
 import Preloader from '../common/Preloader';
 import avatarPhoto from '../../media/avatar.png'
@@ -61,7 +60,7 @@ const Users = (props) => {
                 <span>
                     <span>
                         <div>{user.name}</div>
-                        <div>{"user.status"}</div>
+                        <div>{user.status}</div>
                     </span>
                     <span>
                         <div>{"user.location.country"}</div>
