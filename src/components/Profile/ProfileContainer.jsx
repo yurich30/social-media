@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { profileAPI } from '../../api/api';
 import { setProfile } from '../../redux/profilePageReducer';
 import Profile from './Profile';
 
@@ -12,8 +11,8 @@ class ProfileContainer extends React.Component {
         const routeUserId = this.props.match.params.userId
 
         if(!routeUserId){
-            profileAPI.setProfile().then(data => this.props.setProfile(data))
-        } profileAPI.setProfile(routeUserId).then(data => this.props.setProfile(data))
+            this.props.setProfile()
+        } this.props.setProfile(routeUserId)
     }
 
     render(){

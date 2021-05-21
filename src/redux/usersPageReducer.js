@@ -59,8 +59,8 @@ const usersPageReducer = (state = initialState, action) => {
     }
 }
 
-export const follow = (userId) => ({type: FOLLOW, userId})
-export const unfollow = (userId) => ({type: UNFOLLOW, userId})
+export const followAccept = (userId) => ({type: FOLLOW, userId})
+export const unfollowAccept = (userId) => ({type: UNFOLLOW, userId})
 export const setUsers = (users) => ({type: SET_USERS, users})
 export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber})
 export const setTotalUsers = (totalUsers) => ({type: SET_TOTAL_USERS, totalUsers})
@@ -71,11 +71,33 @@ export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(currentPage))
-            usersAPI .getUsers(currentPage, pageSize).then(data => {
+            usersAPI.getUsers(currentPage, pageSize).then(data => {
                 dispatch(setUsers(data.items))
                 dispatch(setTotalUsers(data.totalCount))
                 dispatch(toggleIsFetching(false))
             })
+    }
+}
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, userId))
+                                usersAPI.unfollow(userId).then(resultCode => {
+                                    if(resultCode === 0){
+                                        dispatch(unfollowAccept(userId))
+                                    }
+                                    dispatch(toggleFollowingInProgress(false, userId))
+                            })
+    }
+}
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, userId))
+                                usersAPI.follow(userId).then(resultCode => {
+                                    if(resultCode === 0){
+                                        dispatch(followAccept(userId))
+                                    }
+                                    dispatch(toggleFollowingInProgress(false, userId))
+                            })
     }
 }
 

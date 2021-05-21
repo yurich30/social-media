@@ -1,10 +1,8 @@
 import { connect } from 'react-redux'
-import { follow, setCurrentPage, setTotalUsers, setUsers, toggleIsFetching, unfollow, toggleFollowingInProgress, getUsers} from '../../redux/usersPageReducer'
-import * as axios from 'axios'
+import { follow, setCurrentPage, setTotalUsers, unfollow, toggleFollowingInProgress, getUsers} from '../../redux/usersPageReducer'
 import React from 'react'
 import './Users.css'
 import Users from './Users'
-import { usersAPI } from '../../api/api'
 
 class UsersAPI extends React.Component{
 
@@ -45,10 +43,8 @@ const UsersContainer = connect(mapStateToProps,
     {
         follow,
         unfollow,
-        setUsers,
         setCurrentPage,
         setTotalUsers,
-        toggleIsFetching,
         toggleFollowingInProgress,
         getUsers,
     }

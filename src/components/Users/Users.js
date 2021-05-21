@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import Preloader from '../common/Preloader';
 import avatarPhoto from '../../media/avatar.png'
 import './Users.css'
-import { usersAPI } from '../../api/api';
 
 const Users = (props) => {
     let totalPages = Math.ceil(props.totalUsers/props.pageSize)
@@ -37,24 +36,8 @@ const Users = (props) => {
                     </div>
                     <div>
                         {user.followed 
-                        ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                            props.toggleFollowingInProgress(true, user.id)
-                                usersAPI.unfollow(user.id).then(resultCode => {
-                                    if(resultCode === 0){
-                                        props.unfollow(user.id)
-                                    }
-                                    props.toggleFollowingInProgress(false, user.id)
-                            })
-                        }}>Unfollow</button> 
-                        : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                            props.toggleFollowingInProgress(true, user.id)
-                                usersAPI.follow(user.id).then(resultCode => {
-                                    if(resultCode === 0){
-                                        props.follow(user.id)
-                                    }
-                                    props.toggleFollowingInProgress(false, user.id)
-                                })
-                            }}>Follow</button>}
+                        ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {props.unfollow(user.id)}}>Unfollow</button> 
+                        : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {props.follow(user.id)}}>Follow</button>}
                     </div>
                 </span>
                 <span>
