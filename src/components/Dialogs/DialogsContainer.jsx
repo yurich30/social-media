@@ -3,7 +3,8 @@ import { addMessageActionCreator, updateMessageTextActionCreator } from '../../r
 import Dialogs from './Dialogs';
 
 const mapStateToProps = (state) => ({
-    state: state.dialogsPage
+    state: state.dialogsPage,
+    isAuth: state.auth.isAuth
 })
 
 const mapDispatchToProps = (dispatch) => {
